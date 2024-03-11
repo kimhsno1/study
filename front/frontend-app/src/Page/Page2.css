@@ -1,14 +1,109 @@
 .page2-container {
     padding: 20px;
-  }
-  
-  .page2-title {
+}
+
+.page2-title {
     font-size: 24px;
     font-weight: bold;
     color: #333;
-  }
-  
-  .page2-content {
+}
+
+.page2-content {
     font-size: 18px;
     color: #555;
-  }
+}
+
+.machine-list {
+    list-style: none;
+    padding: 0;
+}
+
+.machine-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.machine-number {
+    margin-right: 10px;
+}
+
+.toggle-button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.toggle-button.on,
+.toggle-button.alarm-on {
+    background-color: green;
+    color: white;
+}
+
+.toggle-button.off,
+.toggle-button.alarm-off {
+    background-color: red;
+    color: white;
+}
+
+.range-slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #007bff;
+    outline: none;
+    margin-top: 10px;
+}
+
+.range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+}
+
+.range-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #007bff;
+    cursor: pointer;
+}
+
+.record-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.record-button:hover {
+    background-color: #0056b3;
+}
+
+.toggle-all-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-all-button:hover {
+    background-color: #0056b3;
+}
