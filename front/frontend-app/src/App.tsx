@@ -26,6 +26,7 @@ const AppContent: React.FC = () => {
         <div className="button-group">
           <button className="big-button" onClick={() => navigate('/Page1')}>버튼 1</button>
           <button className="big-button" onClick={() => navigate('/Page2')}>버튼 2</button>
+          <br />
           <button className="big-button" onClick={() => navigate('/Page3')}>버튼 3</button>
           <button className="big-button" onClick={() => navigate('/Page4')}>버튼 4</button>
         </div>

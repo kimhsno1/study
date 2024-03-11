@@ -3,7 +3,7 @@
 }
 
 .button-group {
-  display: flex; /* 버튼을 가로로 배열하기 위해 */
+  grid-template-columns: auto auto; /* 두 개의 열을 자동 크기로 설정 */
   justify-content: center; /* 가운데 정렬 */
   gap: 10px; /* 버튼 사이의 간격 조정 */
 }

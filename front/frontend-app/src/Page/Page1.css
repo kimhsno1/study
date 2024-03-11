@@ -1,14 +1,31 @@
 .page1-container {
-    padding: 20px;
-  }
-  
-  .page1-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .page1-content {
-    font-size: 18px;
-    color: #555;
-  }
+  padding: 20px;
+}
+
+.page1-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.page1-content {
+  font-size: 18px;
+  color: #555;
+}
+
+.page1-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.page1-video {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 400px;
+}
