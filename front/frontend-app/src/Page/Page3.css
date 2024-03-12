@@ -1,14 +1,19 @@
 .page3-container {
     padding: 20px;
-  }
-  
-  .page3-title {
+}
+
+.page3-title {
     font-size: 24px;
     font-weight: bold;
     color: #333;
-  }
-  
-  .page3-content {
+}
+
+.page3-content {
     font-size: 18px;
     color: #555;
-  }
+}
+
+.my-calendar-container {
+    width: 80%; /* FullCalendar의 너비를 80%로 설정 */
+    margin: 0 auto; /* 가운데 정렬 */
+}
