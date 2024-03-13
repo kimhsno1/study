@@ -1,49 +1,52 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Page1.css';
 
 const Page1: React.FC = () => {
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const [error, setError] = useState<string | null>(null);
-    const [webcamActive, setWebcamActive] = useState(false);
-    const [stream, setStream] = useState<MediaStream | null>(null);
+    const [localStream, setLocalStream] = useState<MediaStream>();
+    const viewRef = useRef<HTMLVideoElement>(null);
 
-    // 웹캠 권한 요청 및 비디오 스트림 표시
     const startWebcam = async () => {
         try {
-            const newStream = await navigator.mediaDevices.getUserMedia({ video: true });
-            if (videoRef.current) {
-                videoRef.current.srcObject = newStream;
-                console.log('비디오 스트림 : ', newStream);
-                setStream(newStream);
-                setWebcamActive(true);
-            }
-        } catch (err) {
-            setError('웹캠을 사용할 수 없습니다.');
-            console.error('웹캠을 사용할 수 없습니다:', err);
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+            setLocalStream(stream);
+            console.log('시작 스트림 : ', stream);
+        } catch (error) {
+            console.error('웹캠을 사용할 수 없습니다. :', error);
         }
     };
 
-    // 웹캠 종료 함수
-    const stopWebcam = () => {
-        if (stream) {
-            stream.getTracks().forEach((track) => track.stop()); // 모든 트랙을 중지
-            setStream(null); // 스트림 상태 초기화
-            setWebcamActive(false); // 웹캠 상태 업데이트
+    const stopWebcam = async () => {
+        try {
+            const tracks = localStream?.getTracks() ?? [];
+            tracks.forEach((track) => track.stop()); // 이전 스트림의 트랙을 중지합니다.
+            setLocalStream(new MediaStream()); // 비어있는 스트림을 설정하여 비디오 요소가 더 이상 스트림을 재생하지 않도록 합니다.
+        } catch (error) {
+            console.error('웹캠을 종료할 수 없습니다. :', error);
         }
     };
+
+    // 버튼 1이 눌리면 자동으로 웹캠 실행
+    // useEffect(() => {
+    //     startWebcam();
+    // }, []);
+
+    // 웹캠 시작 버튼을 눌렀을때 실행
+    useEffect(() => {
+        if (viewRef.current && localStream) {
+            viewRef.current.srcObject = localStream;
+        }
+    }, [localStream]);
 
     return (
-        <div className="page1-container">
-            <h1 className="page1-title">페이지 1</h1>
-            <p className="page1-content">이것은 페이지 1입니다.</p>
+        <div>
+            <video ref={viewRef} autoPlay playsInline controls></video>
+            <br />
             <button className="page1-button" onClick={startWebcam}>
                 웹캠 시작
             </button>
             <button className="page1-button" onClick={stopWebcam}>
                 웹캠 종료
             </button>
-            {error && <div className="page1-error">{error}</div>}
-            {webcamActive && <video className="page1-video" ref={videoRef} autoPlay />}
         </div>
     );
 };
