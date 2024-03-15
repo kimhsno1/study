@@ -2,14 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Page1.css';
 
 const Page1: React.FC = () => {
-    const [localStream, setLocalStream] = useState<MediaStream>();
+    // localStream 상태가 MediaStream으로 초기화되고 있으나 getUserMedia를 사용해 스틀림을 얻기 전까지는 undefined일 수 있음.
+    const [localStream, setLocalStream] = useState<MediaStream | null>(null);
+    // useRef를 사용해 viewRef라는 변수를 생성, 초기값으로 null 지정.
     const viewRef = useRef<HTMLVideoElement>(null);
 
     const startWebcam = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
             setLocalStream(stream);
-            console.log('시작 스트림 : ', stream);
+            console.log('시작 스트림 id : ', stream.id);
         } catch (error) {
             console.error('웹캠을 사용할 수 없습니다. :', error);
         }
@@ -18,19 +20,14 @@ const Page1: React.FC = () => {
     const stopWebcam = async () => {
         try {
             const tracks = localStream?.getTracks() ?? [];
-            tracks.forEach((track) => track.stop()); // 이전 스트림의 트랙을 중지합니다.
+            tracks.forEach((track: MediaStreamTrack) => track.stop()); // 이전 스트림의 트랙을 중지합니다.
             setLocalStream(new MediaStream()); // 비어있는 스트림을 설정하여 비디오 요소가 더 이상 스트림을 재생하지 않도록 합니다.
         } catch (error) {
             console.error('웹캠을 종료할 수 없습니다. :', error);
         }
     };
 
-    // 버튼 1이 눌리면 자동으로 웹캠 실행
-    // useEffect(() => {
-    //     startWebcam();
-    // }, []);
-
-    // 웹캠 시작 버튼을 눌렀을때 실행
+    // localStream의 상태가 바뀔 때 마다 실행
     useEffect(() => {
         if (viewRef.current && localStream) {
             viewRef.current.srcObject = localStream;
