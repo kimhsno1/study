@@ -58,7 +58,7 @@ const Page2: React.FC = () => {
             <ul className="machine-list">
                 {Object.keys(machineStates).map((machine) => (
                     <li key={machine} className="machine-item">
-                        <span className="machine-number">기계 {machine.slice(-1)}</span>
+                        <span className="machine-number">재배기 {machine.slice(-1)}</span>
                         <button
                             className={`toggle-button ${machineStates[machine].status ? 'on' : 'off'}`}
                             onClick={() => toggleMachineState(machine)}
