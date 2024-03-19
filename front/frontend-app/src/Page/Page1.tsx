@@ -8,12 +8,29 @@ const Page1: React.FC = () => {
     const [isWebcamOn, setIsWebcamOn] = useState<boolean>(false);
     // useRef를 사용해 viewRef라는 변수를 생성, DOM요소에 접근해 비디오 요소에 대한 참조를 생성, 초기값으로 null 지정.
     const viewRef = useRef<HTMLVideoElement>(null);
+    // 현재 시간을 nowTime에 저장
+    const nowTime = new Date().toLocaleTimeString();
 
     const startWebcam = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
             setLocalStream(stream);
             setIsWebcamOn(true);
+            console.log('웹캠 시작', nowTime);
+
+            // post 요청을 통해 백엔드에게 action, time을 넘겨주고 넘겨준 데이터를 다시 받음
+            await fetch('http://localhost:4000/page1', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ action: '웹캠 시작', time: nowTime }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log('웹캠 시작시 백엔드로부터 받은 액션 : ', data.action);
+                    console.log('웹캠 시작시 백엔드로부터 받은 타임 : ', data.time);
+                });
         } catch (error) {
             console.error('웹캠을 사용할 수 없습니다. :', error);
             alert('웹캠을 사용할 수 없습니다.');
@@ -29,6 +46,21 @@ const Page1: React.FC = () => {
             // 비어있는 새 미디어스트림으로 업데이트하여 더 이상 스트림이 재생되지 않게 합니다.
             setLocalStream(new MediaStream());
             setIsWebcamOn(false);
+            console.log('웹캠 종료', nowTime);
+
+            // post 요청을 통해 백엔드에게 action, time을 넘겨주고 넘겨준 데이터를 다시 받음
+            await fetch('http://localhost:4000/page1', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ action: '웹캠 종료', time: nowTime }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log('웹캠 종료시 백엔드로부터 받은 액션 : ', data.action);
+                    console.log('웹캠 종료시 백엔드로부터 받은 타임 : ', data.time);
+                });
         } catch (error) {
             console.error('웹캠을 종료할 수 없습니다. :', error);
             alert('웹캠을 종료할 수 없습니다.');
