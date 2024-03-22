@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './Page1.css';
+import './Css/Page1.css';
 
 const Page1: React.FC = () => {
     // localStream 상태가 MediaStream으로 초기화되고 있으나 getUserMedia를 사용해 스트림을 얻기 전까지는 undefined일 수 있음.
@@ -13,6 +13,7 @@ const Page1: React.FC = () => {
 
     const startWebcam = async () => {
         try {
+            // 브라우저의 미디어 디바이스에 접근하는 비동기 작업
             const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
             setLocalStream(stream);
             setIsWebcamOn(true);

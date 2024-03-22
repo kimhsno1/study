@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Page2.css';
+import './Css/Page2.css';
 
 const Page2: React.FC = () => {
     // 각 기계의 상태 및 기록을 저장하기 위한 상태 변수
