@@ -76,7 +76,7 @@ const Page1: React.FC = () => {
     }, [localStream]);
 
     // 웹캠 시작, 종료
-    const toggleWebcam = async () => {
+    const toggleWebcam = () => {
         if (isWebcamOn) {
             stopWebcam();
         } else {
