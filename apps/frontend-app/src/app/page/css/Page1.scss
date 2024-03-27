@@ -1,0 +1,50 @@
+// 변수
+$page1-primary-color: #007bff;
+$page1-primary-hover-color: #0056b3;
+$page1-text-color: #333;
+$page1-subtext-color: #555;
+$page1-error-color: red;
+
+.page1-container {
+  padding: 20px;
+
+  .page1-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: $page1-text-color;
+  }
+
+  .page1-content {
+    font-size: 18px;
+    color: $page1-subtext-color;
+  }
+
+  .page1-button {
+    margin-top: 20px;
+    margin-right: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: $page1-primary-color;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $page1-primary-hover-color;
+    }
+  }
+
+  .page1-error {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 16px;
+    color: $page1-error-color;
+  }
+
+  .page1-video {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+  }
+}

@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 
 const app = express();
@@ -9,9 +10,16 @@ app.use(express.json());
 // 모든 출처에서의 요청 허용
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('반갑습니다.');
+// 정적 파일 제공
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
+// app.get('/', (req, res) => {
+//   res.send('반갑습니다.');
+// });
 
 // 프론트엔드에서 받은 action과 time을 다시 프론트에게 전달.
 app.post('/page1', (req, res) => {

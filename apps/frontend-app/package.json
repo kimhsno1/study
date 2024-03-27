@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nx serve frontend-app",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "nx test frontend-app",
     "eject": "react-scripts eject"
   },
   "keywords": [],

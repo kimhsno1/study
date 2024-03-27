@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'antd';
 import { PlayCircleOutlined, StopOutlined } from '@ant-design/icons';
-import './css/Page1.css';
+import './css/Page1.scss';
 
 const Page1: React.FC = () => {
   // localStream 상태가 MediaStream으로 초기화되고 있으나 getUserMedia를 사용해 스트림을 얻기 전까지는 undefined일 수 있음.
@@ -116,9 +116,7 @@ const Page1: React.FC = () => {
         size="large"
         className="play-button"
         style={{ fontSize: '25px', width: '70px', height: '70px' }}
-      >
-        {/* {isWebcamOn ? '웹캠 종료' : '웹캠 시작'} */}
-      </Button>
+      ></Button>
     </div>
   );
 };
